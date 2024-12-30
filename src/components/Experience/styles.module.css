@@ -1,0 +1,262 @@
+.experience {
+  padding: 5rem 0;
+  background-color: #f8f9fa;
+  position: relative;
+  min-height: 100vh;
+  border: 2px solid red;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #012C3C;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.accent {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: #4FB965;
+  border-radius: 2px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content {
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    rgba(79, 185, 101, 0.2),
+    rgba(79, 185, 101, 0.6),
+    rgba(79, 185, 101, 0.2)
+  );
+}
+
+.timelineItem {
+  margin-bottom: 3rem;
+  position: relative;
+  width: 50%;
+  padding: 0 2rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.timelineItem:nth-child(odd) {
+  left: 0;
+}
+
+.timelineItem:nth-child(even) {
+  left: 50%;
+}
+
+.timelineItem.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timelineContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.timelineContent::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: #4FB965;
+  border: 4px solid white;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 4px rgba(79, 185, 101, 0.2);
+}
+
+.timelineItem:nth-child(odd) .timelineContent::before {
+  right: -42px;
+}
+
+.timelineItem:nth-child(even) .timelineContent::before {
+  left: -42px;
+}
+
+.year {
+  color: #4FB965;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.timelineTitle {
+  color: #012C3C;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.institution {
+  color: #666;
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 4rem 0;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNumber {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #012C3C;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: #666;
+  font-size: 1rem;
+}
+
+.certifications {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.certifications h3 {
+  color: #012C3C;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.certList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.cert {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cert i {
+  color: #4FB965;
+  font-size: 1.5rem;
+}
+
+.cert span {
+  color: #012C3C;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 12px;
+  }
+
+  .timelineItem {
+    width: 100%;
+    padding-left: 50px;
+  }
+
+  .timelineContent::before {
+    left: -44px;
+  }
+
+  .timelineContent {
+    padding: 1.5rem;
+  }
+
+  .year {
+    font-size: 1.1rem;
+  }
+
+  .timelineTitle {
+    font-size: 1.3rem;
+  }
+
+  .institution {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .statsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .certList {
+    grid-template-columns: 1fr;
+  }
+} 

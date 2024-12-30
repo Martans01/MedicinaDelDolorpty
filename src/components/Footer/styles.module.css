@@ -1,0 +1,163 @@
+.footer {
+  background-color: #012C3C;
+  color: white;
+  padding: 4rem 0 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.branding {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.logoImage {
+  border-radius: 50%;
+}
+
+.brandText h3 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 600;
+  color: #4FB965;
+}
+
+.brandText p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+  color: white;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.linkGroup h4 {
+  color: #4FB965;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.linkGroup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkGroup li {
+  margin-bottom: 0.75rem;
+}
+
+.linkGroup a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.linkGroup a:hover {
+  opacity: 1;
+  color: #4FB965;
+}
+
+.linkGroup i {
+  width: 20px;
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom p {
+  opacity: 0.8;
+  margin: 0;
+}
+
+.social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social a {
+  color: white;
+  opacity: 0.8;
+  transition: all 0.3s;
+  font-size: 1.5rem;
+}
+
+.social a:hover {
+  opacity: 1;
+  color: #4FB965;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 0 2rem;
+  }
+
+  .links {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .brandText h3 {
+    font-size: 1.5rem;
+  }
+  
+  .brandText p {
+    font-size: 1rem;
+  }
+} 
