@@ -128,7 +128,9 @@ export default function Header() {
       }, 150) // Pequeño delay para permitir que el menú se cierre completamente
     } else {
       // Si estamos en otra página, navegamos a la página principal con el anchor
-      router.push(`/#${sectionId}`)
+      setTimeout(() => {
+        router.push(`/#${sectionId}`)
+      }, 100)
     }
   }
 
@@ -149,7 +151,9 @@ export default function Header() {
       }, 150)
     } else {
       // Si estamos en otra página, navegamos a la página principal con el anchor
-      router.push('/#agendar-cita')
+      setTimeout(() => {
+        router.push('/#agendar-cita')
+      }, 100)
     }
   }
 
@@ -159,6 +163,19 @@ export default function Header() {
       setIsMenuOpen(false)
       setIsDropdownOpen(false)
     }
+  }
+
+  // Función mejorada para manejar navegación a otras páginas
+  const handleNavigateTo = (href: string) => {
+    // Cerramos el menú móvil
+    setIsMenuOpen(false)
+    setIsDropdownOpen(false)
+    
+    // Navegamos a la página después de un pequeño delay para asegurar
+    // que el menú se cierre correctamente
+    setTimeout(() => {
+      router.push(href)
+    }, 100)
   }
 
   // Toggle dropdown en dispositivos móviles
@@ -313,15 +330,15 @@ export default function Header() {
               <HiChevronDown className={styles.dropdownArrow} />
             </span>
             <div className={styles.dropdownContent}>
-              <Link href="/servicios" onClick={handleLinkClick}>Desgaste en la columna</Link>
-              <Link href="/rodilla" onClick={handleLinkClick}>Desgaste de rodilla</Link>
-              <Link href="/cadera" onClick={handleLinkClick}>Desgaste de cadera</Link>
-              <Link href="/espalda" onClick={handleLinkClick}>Dolor de espalda</Link>
-              <Link href="/cuello" onClick={handleLinkClick}>Dolor cervical</Link>
-              <Link href="/ciatica" onClick={handleLinkClick}>Ciática</Link>
-              <Link href="/enfermedaddiscal" onClick={handleLinkClick}>Enfermedad discal</Link>
-              <Link href="/hernia" onClick={handleLinkClick}>Hernia discal</Link>
-              <Link href="/canallumbar" onClick={handleLinkClick}>Canal lumbar estrecho</Link>
+              <a href="/servicios" onClick={(e) => {e.preventDefault(); handleNavigateTo('/servicios');}}>Desgaste en la columna</a>
+              <a href="/rodilla" onClick={(e) => {e.preventDefault(); handleNavigateTo('/rodilla');}}>Desgaste de rodilla</a>
+              <a href="/cadera" onClick={(e) => {e.preventDefault(); handleNavigateTo('/cadera');}}>Desgaste de cadera</a>
+              <a href="/espalda" onClick={(e) => {e.preventDefault(); handleNavigateTo('/espalda');}}>Dolor de espalda</a>
+              <a href="/cuello" onClick={(e) => {e.preventDefault(); handleNavigateTo('/cuello');}}>Dolor cervical</a>
+              <a href="/ciatica" onClick={(e) => {e.preventDefault(); handleNavigateTo('/ciatica');}}>Ciática</a>
+              <a href="/enfermedaddiscal" onClick={(e) => {e.preventDefault(); handleNavigateTo('/enfermedaddiscal');}}>Enfermedad discal</a>
+              <a href="/hernia" onClick={(e) => {e.preventDefault(); handleNavigateTo('/hernia');}}>Hernia discal</a>
+              <a href="/canallumbar" onClick={(e) => {e.preventDefault(); handleNavigateTo('/canallumbar');}}>Canal lumbar estrecho</a>
             </div>
           </div>
           <a href="/#experience" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'experience')}>
@@ -342,11 +359,11 @@ export default function Header() {
           </a>
           
           <div className={styles.mobileContactInfo}>
-            <a href="tel:+50766198728" className={styles.mobileContactLink}>
+            <a href="tel:+50766198728" className={styles.mobileContactLink} onClick={() => setIsMenuOpen(false)}>
               <HiPhone className={styles.mobileContactIcon} />
               +507 6619-8728
             </a>
-            <a href="mailto:info@medicinadeldolorpty.com" className={styles.mobileContactLink}>
+            <a href="mailto:info@medicinadeldolorpty.com" className={styles.mobileContactLink} onClick={() => setIsMenuOpen(false)}>
               <HiMail className={styles.mobileContactIcon} />
               info@medicinadeldolorpty.com
             </a>

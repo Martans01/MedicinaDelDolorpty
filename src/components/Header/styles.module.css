@@ -204,6 +204,7 @@
   text-decoration: none;
   transition: all 0.3s ease;
   font-size: 0.95rem;
+  cursor: pointer;
 }
 
 .dropdownContent a:hover {
@@ -492,11 +493,41 @@
     transition: all 0.3s ease;
     font-size: 1rem;
     display: block;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .dropdownContent a:last-child {
+    border-bottom: none;
   }
 
   .dropdownContent a:hover {
     background-color: rgba(1, 44, 60, 0.05);
     padding-left: 3.5rem;
+  }
+
+  .dropdownContent a:active {
+    background-color: rgba(1, 44, 60, 0.1);
+  }
+  
+  /* Indicador visual para los enlaces */
+  .dropdownContent a::before {
+    content: '';
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #4FB965;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+  
+  .dropdownContent a:hover::before {
+    opacity: 1;
   }
 }
 
