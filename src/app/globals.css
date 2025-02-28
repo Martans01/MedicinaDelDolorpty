@@ -1,0 +1,44 @@
+:root {
+    --primary-color: #0052cc;
+    --secondary-color: #004494;
+    --background-color: #f0f0f0;
+    --text-color: #333;
+    --header-height: 90px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: 70px;
+    }
+}
+
+/* ... resto del CSS ... */
+
+.menu-btn {
+    background-image: url('/img/menu.png');
+    /* resto de los estilos */
+}
+
+.hero {
+    background-image: url('/img/fondo.jpg');
+    /* resto de los estilos */
+}
+
+.services {
+    background-image: url('/img/resplandecientes-rascacielos-revestidos-vidrio-aluminio-monzon-areas-mumbais-lower-parel-worli_469504-19.avif');
+    /* resto de los estilos */
+}
+    

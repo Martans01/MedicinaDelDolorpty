@@ -1,0 +1,25 @@
+{
+  "name": "medicina-del-dolor",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-images.js"
+  },
+  "dependencies": {
+    "@types/google.maps": "^3.58.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "^5.4.0",
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.2",
+    "typescript": "5.7.2"
+  }
+}

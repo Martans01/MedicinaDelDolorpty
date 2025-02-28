@@ -1,0 +1,361 @@
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #012C3C 0%, #024363 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--header-height);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(79, 185, 101, 0.15) 0%, transparent 70%);
+  z-index: 1;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/img/pattern.png');
+  opacity: 0.05;
+  animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.textContent {
+  max-width: 600px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(79, 185, 101, 0.1);
+  color: #4FB965;
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(79, 185, 101, 0.2);
+}
+
+.title {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.highlight {
+  background: linear-gradient(135deg, #4FB965 0%, #3d9850 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #4FB965;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.9rem;
+}
+
+.cta {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ctaButton {
+  background: linear-gradient(135deg, #4FB965 0%, #3d9850 100%);
+  color: white;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(79, 185, 101, 0.3);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ctaIcon {
+  font-size: 1.2rem;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3d9850 0%, #4FB965 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 185, 101, 0.4);
+}
+
+.ctaButton:hover::before {
+  opacity: 1;
+}
+
+.learnMore {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.arrow {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
+}
+
+.learnMore:hover {
+  opacity: 1;
+}
+
+.learnMore:hover .arrow {
+  transform: translateX(8px);
+}
+
+.imageContainer {
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 3/4;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.heroImage {
+  border-radius: 30px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.9);
+  width: 100%;
+  height: 100%;
+}
+
+.imageBadge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.imageBadge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.doctorInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.doctorIcon {
+  font-size: 1.5rem;
+  color: #012C3C;
+  background: rgba(1, 44, 60, 0.1);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.doctorInfo div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.doctorInfo span {
+  font-weight: 600;
+  color: #012C3C;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.doctorInfo small {
+  color: #666;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 1;
+}
+
+.wave svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 150px;
+  filter: drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.1));
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 3rem;
+    padding: 4rem 2rem;
+  }
+
+  .textContent {
+    margin: 0 auto;
+  }
+
+  .features {
+    align-items: center;
+  }
+
+  .cta {
+    justify-content: center;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .imageContainer {
+    margin: 0 auto;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .imageBadge {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .imageBadge:hover {
+    transform: translateX(50%) translateY(-3px);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .cta {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ctaButton, .learnMore {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .imageContainer {
+    max-width: 350px;
+  }
+} 
