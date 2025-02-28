@@ -134,6 +134,15 @@
   cursor: pointer;
   position: relative;
   padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navIcon {
+  display: none;
+  color: #2196F3;
+  font-size: 1.2rem;
 }
 
 .navLink::after {
@@ -154,6 +163,13 @@
 .dropdown {
   position: relative;
   padding: 0.5rem 0;
+}
+
+.dropdownArrow {
+  display: none;
+  margin-left: 0.3rem;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .dropdownContent {
@@ -210,77 +226,167 @@
 
 .menuBtn {
   display: none;
+  z-index: 100;
+}
+
+.menuIcon {
+  font-size: 1.8rem;
+  color: #012C3C;
+  transition: all 0.3s ease;
+}
+
+.mobileMenu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 1001;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+.mobileMenu.active {
+  display: flex;
+  transform: translateY(0);
+}
+
+.mobileMenuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.mobileMenuLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #012C3C;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.closeBtn:hover {
+  background-color: rgba(1, 44, 60, 0.05);
+}
+
+.closeIcon {
+  font-size: 1.5rem;
+  color: #012C3C;
+}
+
+.navLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+}
+
+.mobileContactInfo {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobileContactLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.mobileContactLink:hover {
+  background-color: rgba(1, 44, 60, 0.05);
+}
+
+.mobileContactIcon {
+  color: #2196F3;
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 @media (max-width: 1024px) {
   .menuBtn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-  }
-
-  .menuBtnBurger {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: #333;
     position: relative;
-    transition: all 0.3s;
+    z-index: 100;
+    margin-left: auto;
+    transition: all 0.3s ease;
+    border-radius: 8px;
   }
 
-  .menuBtnBurger::before,
-  .menuBtnBurger::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: #333;
-    transition: all 0.3s;
+  .menuBtn:hover {
+    background-color: rgba(1, 44, 60, 0.05);
   }
 
-  .menuBtnBurger::before {
-    transform: translateY(-8px);
-  }
-
-  .menuBtnBurger::after {
-    transform: translateY(8px);
-  }
-
-  .menuBtn.active .menuBtnBurger {
-    background-color: transparent;
-  }
-
-  .menuBtn.active .menuBtnBurger::before {
-    transform: rotate(45deg);
-  }
-
-  .menuBtn.active .menuBtnBurger::after {
-    transform: rotate(-45deg);
-  }
-
-  .navLinks {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: white;
-    padding: 1rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .navLinks.active {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
+  .menuBtn.active .menuIcon {
+    color: #2196F3;
   }
 
   .navLink {
     width: 100%;
-    padding: 0.75rem 2rem;
+    padding: 0.85rem 2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    gap: 1rem;
+  }
+
+  .navIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dropdownArrow {
+    display: block;
+    margin-left: auto;
+    color: #2196F3;
+  }
+
+  .navLink:hover {
+    background-color: rgba(1, 44, 60, 0.05);
+    padding-left: 2.3rem;
   }
 
   .navLink::after {
@@ -288,8 +394,50 @@
   }
 
   .ctaButton {
-    margin: 1rem 2rem;
+    margin: 1.5rem 2rem;
     text-align: center;
+    width: calc(100% - 4rem);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .ctaIcon {
+    font-size: 1.2rem;
+  }
+
+  .dropdown {
+    width: 100%;
+    padding: 0;
+  }
+
+  .dropdown > span {
+    width: 100%;
+    padding: 0.85rem 2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .dropdown > span:hover {
+    background-color: rgba(1, 44, 60, 0.05);
+    padding-left: 2.3rem;
+  }
+
+  .dropdown.open > span {
+    background-color: rgba(1, 44, 60, 0.05);
+  }
+
+  .dropdown > span::after {
+    content: none;
+  }
+
+  .dropdown.open .dropdownArrow {
+    transform: rotate(180deg);
   }
 
   .dropdownContent {
@@ -300,8 +448,45 @@
     visibility: visible;
     min-width: 100%;
     background-color: #f8f9fa;
-    margin: 0.5rem 0;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease, padding 0.3s ease;
+    border-radius: 0;
+    max-height: 0;
+  }
+
+  /* Para permitir hover en desktop y click en móvil */
+  @media (hover: hover) {
+    .dropdown:hover .dropdownContent {
+      height: auto;
+      max-height: 500px;
+      padding: 0.5rem 0;
+    }
+
+    .dropdown:hover .dropdownArrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  /* Estado abierto para click en móvil */
+  .dropdown.open .dropdownContent {
+    height: auto;
+    max-height: 500px;
     padding: 0.5rem 0;
+  }
+
+  .dropdownContent a {
+    padding: 0.85rem 3rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: block;
+  }
+
+  .dropdownContent a:hover {
+    background-color: rgba(1, 44, 60, 0.05);
+    padding-left: 3.5rem;
   }
 }
 
@@ -316,6 +501,15 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (max-width: 768px) {
   .topBar {
     display: none;
@@ -325,24 +519,108 @@
     padding: 0 1rem;
   }
 
+  .mainNav {
+    background-color: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 100;
+  }
+
+  .menuBtn {
+    position: relative;
+    z-index: 110;
+  }
+
+  .menuIcon {
+    font-size: 1.6rem;
+  }
+
   .mainTitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .doctorName {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .logo {
     gap: 0.5rem;
+    position: relative;
+    z-index: 110;
   }
 
   .logoImage {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 
   .specialty {
     font-size: 0.8rem;
+  }
+
+  .mobileMenu {
+    height: 100vh;
+    padding-bottom: 2rem;
+  }
+
+  .mobileMenuHeader {
+    height: 70px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .navLinks {
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .navLink {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .dropdown > span {
+    padding: 1rem 1.5rem;
+  }
+
+  .dropdownContent a {
+    padding: 1rem 2.5rem;
+  }
+
+  .ctaButton {
+    margin: 1.5rem 1.5rem;
+    width: calc(100% - 3rem);
+  }
+
+  /* Fix navbar on very small screens */
+  @media (max-width: 360px) {
+    .mainTitle {
+      font-size: 1rem;
+    }
+    
+    .doctorName {
+      font-size: 0.7rem;
+    }
+    
+    .logoImage {
+      width: 35px;
+      height: 35px;
+    }
+
+    .menuIcon {
+      font-size: 1.4rem;
+    }
+
+    .mobileMenuHeader {
+      height: 60px;
+      padding: 0.75rem 1rem;
+    }
+
+    .mobileMenuLogo {
+      font-size: 1rem;
+    }
+
+    .closeIcon {
+      font-size: 1.3rem;
+    }
   }
 } 
