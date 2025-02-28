@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './styles.module.css'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { 
   HiMenuAlt3, 
   HiX, 
@@ -22,6 +22,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -107,6 +108,31 @@ export default function Header() {
     }
   }, [isMenuOpen])
 
+  // Función mejorada para manejar la navegación a secciones con desplazamiento suave
+  const handleSectionNavigation = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault()
+    
+    // Si el menú móvil está abierto, lo cerramos
+    if (isMenuOpen) {
+      setIsMenuOpen(false)
+    }
+    
+    // Si estamos en la misma página que contiene el anchor 
+    if (pathname === '/' || pathname === '') {
+      // Desplazamiento suave a la sección
+      setTimeout(() => {
+        const section = document.getElementById(sectionId)
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 150) // Pequeño delay para permitir que el menú se cierre completamente
+    } else {
+      // Si estamos en otra página, navegamos a la página principal con el anchor
+      router.push(`/#${sectionId}`)
+    }
+  }
+
+  // Función para manejar el enlace de agendar cita
   const handleScheduleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     
@@ -116,9 +142,11 @@ export default function Header() {
     }
     
     // Verificar si estamos en la página principal
-    if (window.location.pathname === '/') {
-      // Si estamos en la página principal, simplemente scrolleamos al widget
-      document.getElementById('agendar-cita')?.scrollIntoView({ behavior: 'smooth' })
+    if (pathname === '/' || pathname === '') {
+      // Si estamos en la página principal, desplazamiento suave al widget
+      setTimeout(() => {
+        document.getElementById('agendar-cita')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 150)
     } else {
       // Si estamos en otra página, navegamos a la página principal con el anchor
       router.push('/#agendar-cita')
@@ -224,14 +252,14 @@ export default function Header() {
         </div>
 
         <div className={styles.navLinks}>
-          <Link href="/#about" className={styles.navLink} onClick={handleLinkClick}>
+          <a href="/#about" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'about')}>
             <span className={styles.navIcon}><HiUser /></span>
             Sobre Mí
-          </Link>
-          <Link href="/#services" className={styles.navLink} onClick={handleLinkClick}>
+          </a>
+          <a href="/#services" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'services')}>
             <span className={styles.navIcon}><HiOfficeBuilding /></span>
             Servicios
-          </Link>
+          </a>
           <div 
             className={`${styles.dropdown} ${isDropdownOpen ? styles.open : ''}`} 
             ref={dropdownRef}
@@ -259,14 +287,14 @@ export default function Header() {
               <Link href="/canallumbar" onClick={handleLinkClick}>Canal lumbar estrecho</Link>
             </div>
           </div>
-          <Link href="/#experience" className={styles.navLink} onClick={handleLinkClick}>
+          <a href="/#experience" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'experience')}>
             <span className={styles.navIcon}><HiBriefcase /></span>
             Experiencia
-          </Link>
-          <Link href="/#locations" className={styles.navLink} onClick={handleLinkClick}>
+          </a>
+          <a href="/#locations" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'locations')}>
             <span className={styles.navIcon}><HiLocationMarker /></span>
             Ubicaciones
-          </Link>
+          </a>
           <a 
             href="/#agendar-cita"
             className={styles.ctaButton}
