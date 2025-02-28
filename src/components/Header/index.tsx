@@ -220,9 +220,46 @@ export default function Header() {
               <HiMenuAlt3 className={styles.menuIcon} />
             )}
           </button>
+
+          {/* Barra de navegación para desktop (visible solo en pantallas grandes) */}
+          <div className={styles.navLinks}>
+            <Link href="/#about" className={styles.navLink}>
+              Sobre Mí
+            </Link>
+            <Link href="/#services" className={styles.navLink}>
+              Servicios
+            </Link>
+            <div className={styles.dropdown}>
+              <span className={styles.navLink}>
+                Tratamientos
+                <HiChevronDown className={styles.dropdownArrow} />
+              </span>
+              <div className={styles.dropdownContent}>
+                <Link href="/servicios">Desgaste en la columna</Link>
+                <Link href="/rodilla">Desgaste de rodilla</Link>
+                <Link href="/cadera">Desgaste de cadera</Link>
+                <Link href="/espalda">Dolor de espalda</Link>
+                <Link href="/cuello">Dolor cervical</Link>
+                <Link href="/ciatica">Ciática</Link>
+                <Link href="/enfermedaddiscal">Enfermedad discal</Link>
+                <Link href="/hernia">Hernia discal</Link>
+                <Link href="/canallumbar">Canal lumbar estrecho</Link>
+              </div>
+            </div>
+            <Link href="/#experience" className={styles.navLink}>
+              Experiencia
+            </Link>
+            <Link href="/#locations" className={styles.navLink}>
+              Ubicaciones
+            </Link>
+            <a href="/#agendar-cita" className={styles.ctaButton} onClick={handleScheduleClick}>
+              Agendar Cita
+            </a>
+          </div>
         </div>
       </nav>
 
+      {/* Menú móvil (visible solo cuando se activa en pantallas pequeñas) */}
       <div 
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.active : ''}`} 
         ref={menuRef}
@@ -251,7 +288,7 @@ export default function Header() {
           </button>
         </div>
 
-        <div className={styles.navLinks}>
+        <div className={styles.mobileNavLinks}>
           <a href="/#about" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'about')}>
             <span className={styles.navIcon}><HiUser /></span>
             Sobre Mí

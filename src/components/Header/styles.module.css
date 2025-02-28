@@ -125,6 +125,10 @@
   gap: 2rem;
 }
 
+.mobileNavLinks {
+  display: none; /* Oculto por defecto, se muestra solo en modo móvil */
+}
+
 .navLink {
   color: #333;
   text-decoration: none;
@@ -300,14 +304,6 @@
   color: #012C3C;
 }
 
-.navLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1.5rem 0;
-  overflow-y: auto;
-}
-
 .mobileContactInfo {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -361,6 +357,20 @@
 
   .menuBtn.active .menuIcon {
     color: #2196F3;
+  }
+
+  /* Ocultar navLinks de escritorio en móvil */
+  .navLinks {
+    display: none;
+  }
+
+  /* Mostrar mobileNavLinks en el menú móvil */
+  .mobileNavLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+    overflow-y: auto;
   }
 
   .navLink {
