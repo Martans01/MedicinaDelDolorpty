@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import styles from '../styles/services.module.css'
@@ -7,8 +9,37 @@ import Image from 'next/image'
 import { FaCheckCircle, FaClock, FaUserMd } from 'react-icons/fa'
 import CtaSection from '@/components/CtaSection'
 
-// La metadata ahora estará en un archivo separado: opengraph-metadata.ts o layout.tsx
-// debido a que 'use client' no puede tener exportaciones de metadata
+export const metadata: Metadata = {
+  title: 'Tratamiento de Hernia Discal en Panamá | Medicina del Dolor PTY',
+  description: 'Tratamiento especializado para hernia discal en Panamá. Técnicas mínimamente invasivas, atención personalizada y recuperación efectiva con el Dr. Edgar Luna.',
+  keywords: 'hernia discal, tratamiento hernia discal, dolor de espalda, columna vertebral, médico especialista columna, Panamá',
+  openGraph: {
+    title: 'Tratamiento de Hernia Discal | Medicina del Dolor PTY',
+    description: 'Tratamiento especializado para hernia discal en Panamá. Técnicas mínimamente invasivas y recuperación efectiva.',
+    type: 'article',
+    locale: 'es_PA',
+  },
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalProcedure',
+  'name': 'Tratamiento de Hernia Discal',
+  'description': 'Tratamiento especializado para hernias discales con técnicas mínimamente invasivas',
+  'medicalSpecialty': {
+    '@type': 'MedicalSpecialty',
+    'name': 'Medicina del Dolor'
+  },
+  'performedBy': {
+    '@type': 'Physician',
+    'name': 'Dr. Edgar Luna',
+    'medicalSpecialty': 'Especialista en Medicina del Dolor'
+  },
+  'relevantSpecialty': {
+    '@type': 'MedicalSpecialty',
+    'name': 'Tratamiento del Dolor'
+  }
+}
 
 export default function HerniaPage() {
   return (
@@ -21,7 +52,7 @@ export default function HerniaPage() {
               <div className={styles.imageOverlay} />
               <Image
                 src="/img/herniadiscal.webp"
-                alt="Hernia discal"
+                alt="Tratamiento de hernia discal en Panamá"
                 width={800}
                 height={600}
                 className={styles.image}
@@ -31,42 +62,27 @@ export default function HerniaPage() {
             </div>
 
             <div className={styles.textContent}>
-              <h1>Hernia Discal</h1>
-              
-              <div>
-                <h2>¿Qué es una Hernia Discal?</h2>
-                <p>
-                  Una hernia discal ocurre cuando el núcleo suave del disco intervertebral 
-                  protruye a través de una ruptura en el anillo fibroso exterior. Esta 
-                  condición puede ejercer presión sobre los nervios cercanos, causando 
-                  dolor, entumecimiento y otros síntomas que pueden afectar severamente 
-                  la calidad de vida.
-                </p>
-              </div>
+              <h1>Tratamiento Especializado de Hernia Discal</h1>
+              <p>
+                La hernia discal puede causar dolor intenso y limitar significativamente su calidad de vida. 
+                En Medicina del Dolor PTY, ofrecemos tratamientos avanzados y personalizados para aliviar 
+                el dolor y mejorar su movilidad.
+              </p>
 
-              <div>
-                <h2>Síntomas Principales</h2>
-                <ul>
-                  <li>Dolor agudo en la espalda o cuello</li>
-                  <li>Dolor que se irradia hacia brazos o piernas</li>
-                  <li>Entumecimiento o hormigueo</li>
-                  <li>Debilidad muscular</li>
-                  <li>Dolor que empeora con ciertos movimientos</li>
-                  <li>Dificultad para realizar actividades cotidianas</li>
-                </ul>
-              </div>
+              <h2>¿Qué es una Hernia Discal?</h2>
+              <p>
+                Una hernia discal ocurre cuando el núcleo suave de un disco intervertebral se proyecta 
+                a través de una ruptura en el exterior más duro del disco. Esta condición puede causar 
+                dolor, entumecimiento o debilidad en la espalda, piernas o brazos, dependiendo de la 
+                ubicación de la hernia.
+              </p>
 
-              <div>
-                <h2>Tratamientos Especializados</h2>
-                <ul>
-                  <li>Bloqueos epidurales transforaminales</li>
-                  <li>Radiofrecuencia del ganglio de la raíz dorsal</li>
-                  <li>Ozonoterapia intradiscal</li>
-                  <li>Terapia física específica</li>
-                  <li>Manejo farmacológico avanzado</li>
-                  <li>Técnicas mínimamente invasivas de descompresión</li>
-                </ul>
-              </div>
+              <h2>Nuestro Enfoque de Tratamiento</h2>
+              <p>
+                Utilizamos un enfoque integral que combina diferentes modalidades de tratamiento, 
+                adaptadas a las necesidades específicas de cada paciente. Nuestro objetivo es no solo 
+                aliviar el dolor, sino también prevenir futuras complicaciones.
+              </p>
 
               <div className={styles.infoGrid}>
                 <div className={styles.infoCard}>

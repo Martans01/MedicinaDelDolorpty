@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.medicinadeldolorpty.com/sitemap.xml
+
+# Optimizaciones para rastreo
+Crawl-delay: 10
+
+# Rutas permitidas específicamente
+Allow: /hernia
+Allow: /espalda
+Allow: /cuello
+Allow: /cadera
+Allow: /canal-lumbar
+Allow: /ciatica
+Allow: /artrosis-lumbar
+Allow: /enfermedad-discal
+
+# Archivos y directorios a no indexar
+Disallow: /api/
+Disallow: /_next/
+Disallow: /*? 
