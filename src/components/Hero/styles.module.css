@@ -31,6 +31,13 @@
   animation: moveBackground 20s linear infinite;
 }
 
+/* Desactivar animaciones de fondo en móvil */
+@media (max-width: 768px) {
+  .hero::before {
+    animation: none;
+  }
+}
+
 @keyframes moveBackground {
   0% {
     background-position: 0 0;
@@ -235,8 +242,8 @@
 
 .imageBadge {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  bottom: 2rem;
+  left: 2rem;
   background: rgba(255, 255, 255, 0.98);
   padding: 0.75rem 1.25rem;
   border-radius: 12px;
@@ -326,7 +333,7 @@
     margin: 0 auto;
     max-width: 400px;
     width: 100%;
-    animation: float 6s ease-in-out infinite;
+    animation: none;
     display: block;
   }
 
@@ -344,12 +351,12 @@
   }
 
   .imageBadge {
-    right: 50%;
-    transform: translateX(50%);
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .imageBadge:hover {
-    transform: translateX(50%) translateY(-3px);
+    transform: translateX(-50%) translateY(-3px);
   }
 }
 
@@ -357,6 +364,13 @@
   .hero {
     min-height: auto;
     padding-bottom: 80px;
+  }
+
+  /* Optimizar transiciones para móvil */
+  .content {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 
   .title {
@@ -378,6 +392,16 @@
     width: 100%;
     justify-content: center;
   }
+  
+  /* Simplificar animaciones para móvil */
+  .ctaButton {
+    transition: none;
+  }
+  
+  .ctaButton:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(79, 185, 101, 0.3);
+  }
 
   .imageContainer {
     max-width: 300px;
@@ -391,6 +415,7 @@
     margin: 0 auto;
     aspect-ratio: 3/4;
     display: block;
+    animation: none;
   }
 
   .heroImage {
@@ -401,10 +426,46 @@
 
   .imageBadge {
     position: absolute;
-    top: 1rem;
-    right: 50%;
-    transform: translateX(50%);
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 0.5rem 1rem;
+    transition: none;
+  }
+  
+  .imageBadge:hover {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respetar preferencias de reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .content,
+  .imageContainer,
+  .imageWrapper,
+  .heroImage,
+  .imageBadge,
+  .ctaButton,
+  .learnMore,
+  .arrow {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .hero::before {
+    animation: none !important;
+  }
+  
+  .content {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .imageContainer {
+    animation: none !important;
   }
 }
 
@@ -414,10 +475,18 @@
     min-height: auto;
     padding-bottom: 100px;
   }
+  
+  /* Desactivar completamente las transiciones en móvil pequeño */
+  .hero::before {
+    animation: none;
+  }
 
   .content {
     padding: 3rem 1rem;
     gap: 2rem;
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 
   .title {
@@ -427,14 +496,33 @@
   .subtitle {
     font-size: 1rem;
   }
+  
+  /* Simplificar todos los elementos interactivos */
+  .ctaButton {
+    transition: none;
+  }
+  
+  .ctaButton:hover {
+    transform: none;
+  }
+  
+  .learnMore {
+    transition: none;
+  }
+  
+  .learnMore:hover .arrow {
+    transform: none;
+  }
 
   .imageContainer {
     max-width: 250px;
+    animation: none;
   }
 
   .imageWrapper {
     max-width: 250px;
     border-radius: 20px;
+    animation: none;
   }
 
   .heroImage {
@@ -444,6 +532,11 @@
   .imageBadge {
     padding: 0.4rem 0.8rem;
     border-radius: 8px;
+    transition: none;
+  }
+  
+  .imageBadge:hover {
+    transform: translateX(-50%);
   }
   
   .doctorInfo {

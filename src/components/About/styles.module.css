@@ -372,6 +372,11 @@
 
   .title {
     font-size: 2rem;
+    /* Usar color sólido en móvil para evitar problemas con gradientes */
+    color: #012C3C !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
   }
 
   .description {
@@ -391,5 +396,46 @@
   .learnMore {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 4rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    /* Asegurar que el título sea visible en pantallas pequeñas */
+    color: #012C3C !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+  }
+  
+  .sectionBadge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .qualificationText h3 {
+    font-size: 1rem;
+  }
+  
+  .qualificationText p {
+    font-size: 0.9rem;
   }
 } 

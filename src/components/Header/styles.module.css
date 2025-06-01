@@ -141,6 +141,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  background: none;
+  border: none;
+  font-family: inherit;
 }
 
 .navIcon {
@@ -169,11 +172,27 @@
   padding: 0.5rem 0;
 }
 
+.dropdown.open .dropdownContent {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+  max-height: 500px;
+  transform: translateY(0);
+}
+
+.dropdown.open .dropdownArrow {
+  transform: rotate(180deg);
+}
+
 .dropdownArrow {
   display: none;
   margin-left: 0.3rem;
   font-size: 1rem;
   transition: transform 0.3s ease;
+}
+
+.dropdownArrow.rotate {
+  transform: rotate(180deg);
 }
 
 .dropdownContent {
@@ -189,6 +208,12 @@
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.dropdownContent.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdown:hover .dropdownContent {
@@ -222,6 +247,9 @@
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 12px rgba(79, 185, 101, 0.2);
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .ctaButton:hover {
@@ -231,7 +259,7 @@
 
 .menuBtn {
   display: none;
-  z-index: 100;
+  z-index: 1010;
 }
 
 .menuIcon {
@@ -241,23 +269,22 @@
 }
 
 .mobileMenu {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: white;
-  z-index: 1001;
+  z-index: 99999; /* Valor muy alto para asegurar que esté encima */
   flex-direction: column;
-  transform: translateY(-100%);
-  transition: transform 0.3s ease-in-out;
   overflow-y: auto;
+  display: none;
 }
 
 .mobileMenu.active {
   display: flex;
-  transform: translateY(0);
 }
 
 .mobileMenuHeader {
@@ -338,7 +365,7 @@
 
 @media (max-width: 1024px) {
   .menuBtn {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     background: none;
@@ -346,7 +373,7 @@
     cursor: pointer;
     padding: 0.5rem;
     position: relative;
-    z-index: 100;
+    z-index: 1010;
     margin-left: auto;
     transition: all 0.3s ease;
     border-radius: 8px;
@@ -369,9 +396,15 @@
   .mobileNavLinks {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.5rem 0;
-    overflow-y: auto;
+    width: 100%;
+    padding: 1rem 0;
+    /* Mejoras para dispositivos táctiles */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .navLink {
@@ -380,6 +413,21 @@
     font-size: 1.1rem;
     transition: all 0.3s ease;
     gap: 1rem;
+    background: none;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+    color: #333;
+    font-weight: 500;
+    /* Mejoras para dispositivos táctiles */
+    -webkit-tap-highlight-color: rgba(1, 44, 60, 0.3);
+    tap-highlight-color: rgba(1, 44, 60, 0.3);
+    touch-action: manipulation;
+    min-height: 48px; /* Tamaño mínimo recomendado para touch */
+    user-select: none;
+    -webkit-user-select: none;
+    /* Hacer que el elemento sea más "tocable" */
+    position: relative;
   }
 
   .navIcon {
@@ -393,11 +441,22 @@
     display: block;
     margin-left: auto;
     color: #2196F3;
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .dropdown.open .dropdownArrow {
+    transform: rotate(180deg);
   }
 
   .navLink:hover {
     background-color: rgba(1, 44, 60, 0.05);
     padding-left: 2.3rem;
+  }
+
+  .navLink:active {
+    background-color: rgba(1, 44, 60, 0.1);
+    transform: scale(0.98);
   }
 
   .navLink::after {
@@ -413,121 +472,67 @@
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .ctaButton:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 4px 12px rgba(79, 185, 101, 0.4);
   }
 
   .ctaIcon {
     font-size: 1.2rem;
   }
 
+  /* Estilos para el dropdown móvil que estamos reemplazando */
   .dropdown {
     width: 100%;
-    padding: 0;
   }
-
-  .dropdown > span {
+  
+  .dropdown .navLink {
     width: 100%;
     padding: 0.85rem 2rem;
     display: flex;
     align-items: center;
-    position: relative;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    gap: 1rem;
+    justify-content: flex-start;
   }
-
-  .dropdown > span:hover {
-    background-color: rgba(1, 44, 60, 0.05);
-    padding-left: 2.3rem;
+  
+  /* ESTOS ESTILOS FUERON REEMPLAZADOS POR LOS NUEVOS */
+  .dropdown .dropdownContent {
+    display: none;
   }
-
-  .dropdown.open > span {
-    background-color: rgba(1, 44, 60, 0.05);
-  }
-
-  .dropdown > span::after {
-    content: none;
-  }
-
-  .dropdown.open .dropdownArrow {
-    transform: rotate(180deg);
-  }
-
-  .dropdownContent {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    opacity: 1;
-    visibility: visible;
-    min-width: 100%;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-    height: 0;
-    overflow: hidden;
-    transition: height 0.3s ease, padding 0.3s ease;
-    border-radius: 0;
-    max-height: 0;
-  }
-
-  /* Para permitir hover en desktop y click en móvil */
-  @media (hover: hover) {
-    .dropdown:hover .dropdownContent {
-      height: auto;
-      max-height: 500px;
-      padding: 0.5rem 0;
-    }
-
-    .dropdown:hover .dropdownArrow {
-      transform: rotate(180deg);
-    }
-  }
-
-  /* Estado abierto para click en móvil */
+  
   .dropdown.open .dropdownContent {
-    height: auto;
-    max-height: 500px;
-    padding: 0.5rem 0;
+    display: none;
   }
-
-  .dropdownContent a {
+  
+  /* Nuevos estilos para el dropdown móvil */
+  .mobileDropdownContainer {
+    width: 100%;
+  }
+  
+  .mobileDropdownContainer .navLink {
+    width: 100%;
+    padding: 0.85rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+  
+  .mobileDropdownContainer .dropdownLink {
     padding: 0.85rem 3rem;
-    transition: all 0.3s ease;
     font-size: 1rem;
-    display: block;
     cursor: pointer;
-    position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
   }
-
-  .dropdownContent a:last-child {
-    border-bottom: none;
-  }
-
-  .dropdownContent a:hover {
+  
+  .mobileDropdownContainer .dropdownLink:hover {
     background-color: rgba(1, 44, 60, 0.05);
     padding-left: 3.5rem;
-  }
-
-  .dropdownContent a:active {
-    background-color: rgba(1, 44, 60, 0.1);
-  }
-  
-  /* Indicador visual para los enlaces */
-  .dropdownContent a::before {
-    content: '';
-    position: absolute;
-    left: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #4FB965;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-  }
-  
-  .dropdownContent a:hover::before {
-    opacity: 1;
   }
 }
 
@@ -569,7 +574,7 @@
 
   .menuBtn {
     position: relative;
-    z-index: 110;
+    z-index: 1010;
   }
 
   .menuIcon {
@@ -600,8 +605,18 @@
   }
 
   .mobileMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
     height: 100vh;
-    padding-bottom: 2rem;
+    display: none;
+  }
+
+  .mobileMenu.active {
+    display: flex;
   }
 
   .mobileMenuHeader {
@@ -609,14 +624,20 @@
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
   }
 
-  .navLinks {
+  .mobileNavLinks {
     gap: 0.75rem;
     padding-top: 1rem;
+    width: 100%;
   }
 
   .navLink {
     padding: 1rem 1.5rem;
     font-size: 1.1rem;
+    background: none;
+    border: none;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
   }
 
   .dropdown > span {
@@ -664,4 +685,128 @@
       font-size: 1.3rem;
     }
   }
+}
+
+/* Estilo para los elementos div que funcionan como enlaces en el menú móvil */
+.dropdownLink {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.85rem 1.5rem;
+  color: #333;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropdownLink:hover {
+  background-color: rgba(1, 44, 60, 0.05);
+  color: #012C3C;
+  padding-left: 2rem;
+}
+
+.mobileNavLinks a.navLink,
+.mobileNavLinks button.navLink {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(1, 44, 60, 0.2);
+  touch-action: manipulation;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  text-align: left;
+  background: none;
+  font-size: 1.1rem;
+  font-family: inherit;
+  color: inherit;
+}
+
+.mobileNavLinks a.ctaButton,
+.mobileNavLinks button.ctaButton {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(79, 185, 101, 0.2);
+  touch-action: manipulation;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+  padding: 1rem 2rem;
+  margin: 1rem 2rem 0;
+  width: calc(100% - 4rem);
+  justify-content: center;
+  background: linear-gradient(135deg, #012C3C 0%, #2196F3 100%);
+  color: white;
+  border: none;
+  font-family: inherit;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobileContactInfo div {
+  cursor: pointer;
+}
+
+div.mobileMenuLogo {
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  /* Estilos adicionales para el menú móvil */
+  .dropdownContent div {
+    padding: 0.85rem 3rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .dropdownContent div:hover {
+    background-color: rgba(1, 44, 60, 0.05);
+    padding-left: 3.5rem;
+  }
+}
+
+/* Nuevo estilo para la sección de tratamientos en móvil */
+.tratamientosSection {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 500;
+  padding: 0.85rem 2rem;
+  font-size: 1.1rem;
+  color: #012C3C;
+  background-color: rgba(1, 44, 60, 0.03);
+}
+
+.tratamientosList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(1, 44, 60, 0.02);
+}
+
+.tratamientoLink {
+  display: block;
+  padding: 0.85rem 3rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.tratamientoLink:hover {
+  background-color: rgba(1, 44, 60, 0.08);
+  padding-left: 3.5rem;
 } 

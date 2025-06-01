@@ -3,11 +3,12 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './styles.module.css'
 import servicesStyles from '../../app/styles/services.module.css'
-import { FaUserMd, FaHospital, FaHeartbeat, FaCalendarCheck, FaArrowRight, FaSpinner, FaRedoAlt } from 'react-icons/fa'
+import { FaUserMd, FaHospital, FaHeartbeat, FaCalendarCheck, FaArrowRight, FaSpinner, FaRedoAlt, FaExpand, FaCompress, FaCheck, FaEye, FaTimes } from 'react-icons/fa'
 
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const widgetRef = useRef<HTMLIFrameElement>(null)
+  const widgetContainerRef = useRef<HTMLDivElement>(null)
   const [widgetLoading, setWidgetLoading] = useState(true)
   const [widgetError, setWidgetError] = useState(false)
   const [retryCount, setRetryCount] = useState(0)
@@ -68,6 +69,8 @@ export default function About() {
       }
     }
 
+    // Ya no intentamos acceder al contentWindow del iframe porque causa errores de seguridad
+
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current)
@@ -95,6 +98,14 @@ export default function About() {
     }
   }
 
+  // Clase CSS base para el contenedor del widget
+  const widgetContainerClass = servicesStyles.widgetContainer
+
+  // URL para la autenticación directa (sin iframe)
+  const openLoginDirectly = () => {
+    window.open('https://app.cliniweb.com/es/perfil/edgar-luna', '_blank')
+  }
+
   return (
     <div className={styles.about} id="about" ref={sectionRef}>
       <div className={styles.container}>
@@ -102,7 +113,7 @@ export default function About() {
           <div className={styles.imageSection}>
             <div className={styles.mainImage}>
               <Image
-                src="/img/_MG_7347.jpg"
+                src="/img/402A0250.jpg"
                 alt="Dr. Edgar Luna en consulta"
                 width={500}
                 height={600}
@@ -182,8 +193,23 @@ export default function About() {
         <div className={servicesStyles.widgetSection} id="agendar-cita">
           <h2>Agende su cita directamente</h2>
           <p>Utilice nuestro sistema de citas en línea para encontrar el horario que mejor se adapte a sus necesidades.</p>
-          
-          <div className={servicesStyles.widgetContainer}>
+          <p style={{ fontStyle: 'italic', fontSize: '0.9em' }}>Haz clic en el área de abajo para abrir el sistema de citas en una nueva pestaña.</p>
+
+          <div
+            ref={widgetContainerRef}
+            className={widgetContainerClass} // Clase base sin expansión
+            style={{
+              transition: 'all 0.5s ease',
+              height: '700px', // Altura fija
+              maxWidth: '100%', // Ancho máximo
+              margin: '0 auto', // Centrado
+              position: 'relative', // Necesario para el overlay absoluto
+              // REMOVED: Estilos condicionales de expansión (top, left, right, zIndex, boxShadow)
+              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)' // Sombra base
+            }}
+          >
+            {/* REMOVED: Botones de control */}
+
             {widgetLoading && (
               <div className={servicesStyles.widgetLoading}>
                 <FaSpinner className={servicesStyles.spinnerIcon} />
@@ -194,13 +220,22 @@ export default function About() {
             {widgetError && (
               <div className={servicesStyles.widgetError}>
                 <p>Ha ocurrido un problema cargando el sistema de citas.</p>
-                <button 
-                  onClick={retryLoadingWidget}
-                  disabled={retryCount >= MAX_RETRIES}
-                  className={servicesStyles.retryButton}
-                >
-                  <FaRedoAlt /> Reintentar
-                </button>
+                <div className={servicesStyles.widgetErrorActions}>
+                  <button 
+                    onClick={retryLoadingWidget}
+                    disabled={retryCount >= MAX_RETRIES}
+                    className={servicesStyles.retryButton}
+                  >
+                    <FaRedoAlt /> Reintentar
+                  </button>
+                  
+                  <button 
+                    onClick={openLoginDirectly}
+                    className={servicesStyles.openExternalButton}
+                  >
+                    Abrir en nueva ventana
+                  </button>
+                </div>
                 {retryCount >= MAX_RETRIES && (
                   <p className={servicesStyles.widgetFallback}>
                     También puede agendar su cita llamando al{' '}
@@ -229,8 +264,27 @@ export default function About() {
               }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               loading="lazy"
-              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+              // Restaurar allow-same-origin para permitir sessionStorage y serviceWorker
+              sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation"
             />
+
+            {/* Overlay transparente para capturar clics (SOLO si no hay error y no está cargando) */}
+            { !widgetLoading && !widgetError && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'transparent',
+                  zIndex: 10, // Asegura que esté sobre el iframe y contenido de error/carga
+                  cursor: 'pointer'
+                }}
+                onClick={openLoginDirectly}
+                title="Haz clic para abrir el sistema de citas en una nueva pestaña"
+              />
+            )}
           </div>
         </div>
       </div>

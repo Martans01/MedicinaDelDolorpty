@@ -33,27 +33,69 @@ export default function Header() {
       setIsScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
+    
+
+    
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+
+
+  // Función de navegación limpia y optimizada
+  const handleNavItemClick = (sectionId: string) => {
+    // Buscar la sección
+    const section = document.getElementById(sectionId)
+    
+    if (section) {
+      // Calcular posición con offset para el header
+      const elementPosition = section.getBoundingClientRect().top + window.scrollY
+      const offsetPosition = elementPosition - 80
+      
+      // Hacer scroll suave
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+      
+      // Cerrar menú
+      setIsMenuOpen(false)
+    } else {
+      console.error(`Sección no encontrada: ${sectionId}`)
+      setIsMenuOpen(false)
+    }
+  }
+
+
 
   // Cerrar el menú al hacer clic fuera de él
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(event.target as Node) && isMenuOpen) {
-        setIsMenuOpen(false)
+      const target = event.target as Node;
+      
+      // NO cerrar el menú si el click fue dentro del menú móvil
+      if (menuRef.current && menuRef.current.contains(target)) {
+        return; // No hacer nada si el click fue dentro del menú móvil
+      }
+      
+      if (navRef.current && !navRef.current.contains(target) && isMenuOpen) {
+        setIsMenuOpen(false);
       }
 
-      // Cerrar dropdown al hacer clic fuera
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node) && isDropdownOpen) {
-        setIsDropdownOpen(false)
+      // Cerrar dropdown solo si se hace clic fuera del área del dropdown
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(target) && 
+        isDropdownOpen
+      ) {
+        setIsDropdownOpen(false);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [isMenuOpen, isDropdownOpen])
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen, isDropdownOpen]);
 
   // Cerrar el menú al cambiar el tamaño de la ventana
   useEffect(() => {
@@ -78,6 +120,7 @@ export default function Header() {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden'
+      document.body.style.height = '100%'
       
       // Enfocar el botón de cerrar para accesibilidad
       if (closeButtonRef.current) {
@@ -87,10 +130,12 @@ export default function Header() {
       }
     } else {
       document.body.style.overflow = ''
+      document.body.style.height = ''
     }
     
     return () => {
       document.body.style.overflow = ''
+      document.body.style.height = ''
     }
   }, [isMenuOpen])
 
@@ -98,7 +143,7 @@ export default function Header() {
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false);
       }
     }
 
@@ -108,83 +153,92 @@ export default function Header() {
     }
   }, [isMenuOpen])
 
-  // Función mejorada para manejar la navegación a secciones con desplazamiento suave
-  const handleSectionNavigation = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-    e.preventDefault()
-    
-    // Si el menú móvil está abierto, lo cerramos
-    if (isMenuOpen) {
-      setIsMenuOpen(false)
-    }
-    
-    // Si estamos en la misma página que contiene el anchor 
-    if (pathname === '/' || pathname === '') {
-      // Desplazamiento suave a la sección
-      setTimeout(() => {
-        const section = document.getElementById(sectionId)
+  // DESACTIVADO TEMPORALMENTE - Efecto que maneja hash links (causaba conflictos)
+  /*
+  useEffect(() => {
+    // Función para manejar los clics en enlaces de tipo "hash" (#)
+    const handleHashLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      
+      if (link && link.hash && link.pathname === window.location.pathname) {
+        e.preventDefault();
+        const sectionId = link.hash.substring(1);
+        const section = document.getElementById(sectionId);
+        
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          setIsMenuOpen(false);
+          setIsDropdownOpen(false);
+          
+          setTimeout(() => {
+            const headerOffset = 80;
+            const elementPosition = section.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }, 100);
         }
-      }, 150) // Pequeño delay para permitir que el menú se cierre completamente
-    } else {
-      // Si estamos en otra página, navegamos a la página principal con el anchor
-      setTimeout(() => {
-        router.push(`/#${sectionId}`)
-      }, 100)
-    }
-  }
-
-  // Función para manejar el enlace de agendar cita
-  const handleScheduleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
+      }
+    };
     
-    // Si el menú móvil está abierto, lo cerramos
-    if (isMenuOpen) {
-      setIsMenuOpen(false)
-    }
+    document.addEventListener('click', handleHashLinkClick);
     
-    // Verificar si estamos en la página principal
-    if (pathname === '/' || pathname === '') {
-      // Si estamos en la página principal, desplazamiento suave al widget
-      setTimeout(() => {
-        document.getElementById('agendar-cita')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 150)
-    } else {
-      // Si estamos en otra página, navegamos a la página principal con el anchor
-      setTimeout(() => {
-        router.push('/#agendar-cita')
-      }, 100)
-    }
-  }
+    return () => {
+      document.removeEventListener('click', handleHashLinkClick);
+    };
+  }, []);
+  */
 
-  // Función para cerrar el menú al hacer clic en un enlace
-  const handleLinkClick = () => {
-    if (window.innerWidth <= 1024) {
-      setIsMenuOpen(false)
+  // Cerrar el menú cuando cambia la ruta (sin manejar hash para evitar conflictos)
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsDropdownOpen(false);
+    
+    // DESACTIVADO: manejo de hash para evitar conflictos con navegación móvil
+    /*
+    if (pathname === '/' && window.location.hash) {
+      const sectionId = window.location.hash.substring(1);
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const headerOffset = 80;
+          const elementPosition = section.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+    */
+  }, [pathname]);
+
+  // Función para alternar el menú
+  const toggleMenu = () => {
+    setIsMenuOpen(prevState => !prevState)
+    if (!isMenuOpen) {
+      // Si estamos abriendo el menú, cerramos el dropdown
       setIsDropdownOpen(false)
     }
   }
 
-  // Función mejorada para manejar navegación a otras páginas
-  const handleNavigateTo = (href: string) => {
-    // Cerramos el menú móvil
-    setIsMenuOpen(false)
-    setIsDropdownOpen(false)
-    
-    // Navegamos a la página después de un pequeño delay para asegurar
-    // que el menú se cierre correctamente
-    setTimeout(() => {
-      router.push(href)
-    }, 100)
-  }
-
-  // Toggle dropdown en dispositivos móviles
-  const toggleDropdown = (e: React.MouseEvent) => {
-    if (window.innerWidth <= 1024) {
-      e.preventDefault()
-      setIsDropdownOpen(!isDropdownOpen)
+  // Añadir clase al body para evitar scroll cuando el menú está abierto
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('menu-open')
+    } else {
+      document.body.classList.remove('menu-open')
     }
-  }
+    
+    return () => {
+      document.body.classList.remove('menu-open')
+    }
+  }, [isMenuOpen])
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
@@ -211,7 +265,7 @@ export default function Header() {
 
       <nav className={`${styles.mainNav} ${isScrolled ? styles.scrolled : ''}`} ref={navRef}>
         <div className={styles.container}>
-          <Link href="/" className={styles.logo} onClick={handleLinkClick}>
+          <Link href="/" className={styles.logo}>
             <Image 
               src="/img/hor.jpg" 
               alt="Dr. Edgar Luna" 
@@ -227,7 +281,7 @@ export default function Header() {
 
           <button 
             className={`${styles.menuBtn} ${isMenuOpen ? styles.active : ''}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={toggleMenu}
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -269,14 +323,14 @@ export default function Header() {
             <Link href="/#locations" className={styles.navLink}>
               Ubicaciones
             </Link>
-            <a href="/#agendar-cita" className={styles.ctaButton} onClick={handleScheduleClick}>
+            <Link href="/#agendar-cita" className={styles.ctaButton}>
               Agendar Cita
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
 
-      {/* Menú móvil (visible solo cuando se activa en pantallas pequeñas) */}
+      {/* Menú móvil */}
       <div 
         className={`${styles.mobileMenu} ${isMenuOpen ? styles.active : ''}`} 
         ref={menuRef}
@@ -285,7 +339,7 @@ export default function Header() {
         aria-label="Menú de navegación"
       >
         <div className={styles.mobileMenuHeader}>
-          <Link href="/" className={styles.mobileMenuLogo} onClick={handleLinkClick}>
+          <Link href="/" className={styles.mobileMenuLogo}>
             <Image 
               src="/img/hor.jpg" 
               alt="Dr. Edgar Luna" 
@@ -306,64 +360,127 @@ export default function Header() {
         </div>
 
         <div className={styles.mobileNavLinks}>
-          <a href="/#about" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'about')}>
+          <button 
+            className={styles.navLink} 
+            data-mobile-nav-link="about"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handleNavItemClick('about')
+            }}
+          >
             <span className={styles.navIcon}><HiUser /></span>
             Sobre Mí
-          </a>
-          <a href="/#services" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'services')}>
+          </button>
+          
+          <button 
+            className={styles.navLink} 
+            data-mobile-nav-link="services"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              console.log('🎯 CLICK EN SERVICIOS')
+              handleNavItemClick('services')
+            }}
+          >
             <span className={styles.navIcon}><HiOfficeBuilding /></span>
             Servicios
-          </a>
-          <div 
-            className={`${styles.dropdown} ${isDropdownOpen ? styles.open : ''}`} 
-            ref={dropdownRef}
-          >
-            <span 
-              className={styles.navLink} 
-              onClick={toggleDropdown}
-              role="button"
-              tabIndex={0}
-              aria-expanded={isDropdownOpen}
-            >
+          </button>
+          
+          {/* Sección tratamientos simplificada */}
+          <div className={styles.tratamientosSection}>
+            <div className={styles.sectionTitle}>
               <span className={styles.navIcon}><HiBriefcase /></span>
-              Tratamientos
-              <HiChevronDown className={styles.dropdownArrow} />
-            </span>
-            <div className={styles.dropdownContent}>
-              <a href="/servicios" onClick={(e) => {e.preventDefault(); handleNavigateTo('/servicios');}}>Desgaste en la columna</a>
-              <a href="/rodilla" onClick={(e) => {e.preventDefault(); handleNavigateTo('/rodilla');}}>Desgaste de rodilla</a>
-              <a href="/cadera" onClick={(e) => {e.preventDefault(); handleNavigateTo('/cadera');}}>Desgaste de cadera</a>
-              <a href="/espalda" onClick={(e) => {e.preventDefault(); handleNavigateTo('/espalda');}}>Dolor de espalda</a>
-              <a href="/cuello" onClick={(e) => {e.preventDefault(); handleNavigateTo('/cuello');}}>Dolor cervical</a>
-              <a href="/ciatica" onClick={(e) => {e.preventDefault(); handleNavigateTo('/ciatica');}}>Ciática</a>
-              <a href="/enfermedaddiscal" onClick={(e) => {e.preventDefault(); handleNavigateTo('/enfermedaddiscal');}}>Enfermedad discal</a>
-              <a href="/hernia" onClick={(e) => {e.preventDefault(); handleNavigateTo('/hernia');}}>Hernia discal</a>
-              <a href="/canallumbar" onClick={(e) => {e.preventDefault(); handleNavigateTo('/canallumbar');}}>Canal lumbar estrecho</a>
+              <span>Tratamientos</span>
+            </div>
+            
+            <div className={styles.tratamientosList}>
+              <Link href="/servicios" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Desgaste en la columna
+              </Link>
+              <Link href="/rodilla" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Desgaste de rodilla
+              </Link>
+              <Link href="/cadera" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Desgaste de cadera
+              </Link>
+              <Link href="/espalda" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Dolor de espalda
+              </Link>
+              <Link href="/cuello" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Dolor cervical
+              </Link>
+              <Link href="/ciatica" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Ciática
+              </Link>
+              <Link href="/enfermedaddiscal" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Enfermedad discal
+              </Link>
+              <Link href="/hernia" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Hernia discal
+              </Link>
+              <Link href="/canallumbar" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+                Canal lumbar estrecho
+              </Link>
             </div>
           </div>
-          <a href="/#experience" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'experience')}>
+          
+          <button 
+            className={styles.navLink} 
+            data-mobile-nav-link="experience"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              console.log('🎯 CLICK EN EXPERIENCIA')
+              handleNavItemClick('experience')
+            }}
+          >
             <span className={styles.navIcon}><HiBriefcase /></span>
             Experiencia
-          </a>
-          <a href="/#locations" className={styles.navLink} onClick={(e) => handleSectionNavigation(e, 'locations')}>
+          </button>
+          
+          <button 
+            className={styles.navLink} 
+            data-mobile-nav-link="locations"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              console.log('🎯 CLICK EN UBICACIONES')
+              handleNavItemClick('locations')
+            }}
+          >
             <span className={styles.navIcon}><HiLocationMarker /></span>
             Ubicaciones
-          </a>
-          <a 
-            href="/#agendar-cita"
-            className={styles.ctaButton}
-            onClick={handleScheduleClick}
+          </button>
+          
+          <button 
+            className={styles.ctaButton} 
+            data-mobile-nav-link="agendar-cita"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              console.log('🎯 CLICK EN AGENDAR CITA')
+              handleNavItemClick('agendar-cita')
+            }}
           >
             <HiCalendar className={styles.ctaIcon} />
             Agendar Cita
-          </a>
+          </button>
+
+
           
           <div className={styles.mobileContactInfo}>
-            <a href="tel:+50766198728" className={styles.mobileContactLink} onClick={() => setIsMenuOpen(false)}>
+            <a 
+              href="tel:+50766198728"
+              className={styles.mobileContactLink}
+            >
               <HiPhone className={styles.mobileContactIcon} />
               +507 6619-8728
             </a>
-            <a href="mailto:info@medicinadeldolorpty.com" className={styles.mobileContactLink} onClick={() => setIsMenuOpen(false)}>
+            <a 
+              href="mailto:info@medicinadeldolorpty.com"
+              className={styles.mobileContactLink}
+            >
               <HiMail className={styles.mobileContactIcon} />
               info@medicinadeldolorpty.com
             </a>
@@ -372,4 +489,4 @@ export default function Header() {
       </div>
     </header>
   )
-} 
+}

@@ -56,13 +56,13 @@ export default function Hero() {
         <div className={styles.imageContainer}>
           <div className={styles.imageWrapper}>
             <Image
-              src="/img/sobremi.jpg"
+              src="/img/402A0267.jpg"
               alt="Dr. Edgar Luna"
               width={450}
               height={600}
               priority
               className={styles.heroImage}
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 0%' }}
             />
             <div className={styles.imageBadge}>
               <div className={styles.doctorInfo}>
