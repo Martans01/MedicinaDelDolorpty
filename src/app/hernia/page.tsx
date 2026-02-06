@@ -56,7 +56,6 @@ export default function HerniaPage() {
                 height={600}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
 

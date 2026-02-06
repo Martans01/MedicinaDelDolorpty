@@ -21,7 +21,6 @@ export default function KneePainPage() {
                 height={600}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
 
@@ -98,8 +97,8 @@ export default function KneePainPage() {
                     <FaWhatsapp size={24} />
                     Contactar por WhatsApp
                   </a>
-                  <a 
-                    href="/agendar" 
+                  <a
+                    href="/#agendar-cita"
                     className={`${styles.ctaButton} ${styles.ctaButtonSecondary}`}
                   >
                     <FaCalendarAlt size={24} />

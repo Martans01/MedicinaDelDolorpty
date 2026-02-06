@@ -22,7 +22,6 @@ export default function NeckPainPage() {
                 height={600}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
 

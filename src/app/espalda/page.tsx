@@ -22,7 +22,6 @@ export default function BackPainPage() {
                 height={600}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
 

@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import Providers from './providers'
 
 export const metadata: Metadata = {
   title: 'Medicina del Dolor PTY | Dr. Edgar Luna - Especialista en Dolor Crónico',
@@ -28,8 +29,8 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'TU-CÓDIGO-DE-VERIFICACIÓN', // Reemplaza esto con el código que te da Google Search Console
+  alternates: {
+    canonical: 'https://www.medicinadeldolorpty.com',
   },
 }
 
@@ -41,15 +42,16 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <link 
-          rel="stylesheet" 
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         />
-        <link rel="canonical" href="https://www.medicinadeldolorpty.com" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 } 

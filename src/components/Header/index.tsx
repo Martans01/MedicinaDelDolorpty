@@ -4,17 +4,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './styles.module.css'
 import { useRouter, usePathname } from 'next/navigation'
-import { 
-  HiMenuAlt3, 
-  HiX, 
-  HiUser, 
-  HiOfficeBuilding, 
-  HiBriefcase, 
-  HiLocationMarker, 
+import {
+  HiMenuAlt3,
+  HiX,
+  HiUser,
+  HiOfficeBuilding,
+  HiBriefcase,
+  HiLocationMarker,
   HiCalendar,
   HiChevronDown,
   HiPhone,
-  HiMail
+  HiMail,
+  HiPlay
 } from 'react-icons/hi'
 
 export default function Header() {
@@ -227,19 +228,6 @@ export default function Header() {
     }
   }
 
-  // Añadir clase al body para evitar scroll cuando el menú está abierto
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.classList.add('menu-open')
-    } else {
-      document.body.classList.remove('menu-open')
-    }
-    
-    return () => {
-      document.body.classList.remove('menu-open')
-    }
-  }, [isMenuOpen])
-
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.topBar}>
@@ -312,9 +300,9 @@ export default function Header() {
                 <Link href="/espalda">Dolor de espalda</Link>
                 <Link href="/cuello">Dolor cervical</Link>
                 <Link href="/ciatica">Ciática</Link>
-                <Link href="/enfermedaddiscal">Enfermedad discal</Link>
+                <Link href="/enfermedad-discal">Enfermedad discal</Link>
                 <Link href="/hernia">Hernia discal</Link>
-                <Link href="/canallumbar">Canal lumbar estrecho</Link>
+                <Link href="/canal-lumbar">Canal lumbar estrecho</Link>
               </div>
             </div>
             <Link href="/#experience" className={styles.navLink}>
@@ -322,6 +310,9 @@ export default function Header() {
             </Link>
             <Link href="/#locations" className={styles.navLink}>
               Ubicaciones
+            </Link>
+            <Link href="/blog" className={styles.navLink}>
+              Blog
             </Link>
             <Link href="/#agendar-cita" className={styles.ctaButton}>
               Agendar Cita
@@ -379,7 +370,6 @@ export default function Header() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              console.log('🎯 CLICK EN SERVICIOS')
               handleNavItemClick('services')
             }}
           >
@@ -413,13 +403,13 @@ export default function Header() {
               <Link href="/ciatica" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
                 Ciática
               </Link>
-              <Link href="/enfermedaddiscal" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+              <Link href="/enfermedad-discal" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
                 Enfermedad discal
               </Link>
               <Link href="/hernia" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
                 Hernia discal
               </Link>
-              <Link href="/canallumbar" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
+              <Link href="/canal-lumbar" className={styles.tratamientoLink} onClick={() => setIsMenuOpen(false)}>
                 Canal lumbar estrecho
               </Link>
             </div>
@@ -431,7 +421,6 @@ export default function Header() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              console.log('🎯 CLICK EN EXPERIENCIA')
               handleNavItemClick('experience')
             }}
           >
@@ -445,7 +434,6 @@ export default function Header() {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              console.log('🎯 CLICK EN UBICACIONES')
               handleNavItemClick('locations')
             }}
           >
@@ -453,13 +441,17 @@ export default function Header() {
             Ubicaciones
           </button>
           
-          <button 
-            className={styles.ctaButton} 
+          <Link href="/blog" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>
+            <span className={styles.navIcon}><HiPlay /></span>
+            Blog
+          </Link>
+
+          <button
+            className={styles.ctaButton}
             data-mobile-nav-link="agendar-cita"
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              console.log('🎯 CLICK EN AGENDAR CITA')
               handleNavItemClick('agendar-cita')
             }}
           >

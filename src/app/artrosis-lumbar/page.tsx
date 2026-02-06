@@ -23,7 +23,6 @@ export default function ArtrosisLumbarPage() {
                 height={600}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
             

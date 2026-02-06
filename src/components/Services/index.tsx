@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './styles.module.css'
@@ -106,7 +106,6 @@ const procedures = [
 ]
 
 export default function Services() {
-  const [activeTab, setActiveTab] = useState('services')
   const sectionRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -146,59 +145,43 @@ export default function Services() {
           </p>
         </div>
 
-        <div className={styles.tabs}>
-          <button
-            className={`${styles.tab} ${activeTab === 'services' ? styles.active : ''}`}
-            onClick={() => setActiveTab('services')}
-          >
-            Tipos de Dolor
-          </button>
-          <button
-            className={`${styles.tab} ${activeTab === 'procedures' ? styles.active : ''}`}
-            onClick={() => setActiveTab('procedures')}
-          >
-            Procedimientos
-          </button>
+        <h3 className={styles.subsectionTitle}>Tipos de Dolor</h3>
+        <div className={styles.grid}>
+          {services.map((service, index) => (
+            <Link href={service.path} key={index} className={styles.card}>
+              <div className={styles.imageContainer}>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className={styles.image}
+                />
+                <div className={styles.imageOverlay} />
+              </div>
+              <div className={styles.content}>
+                <h3 className={styles.serviceTitle}>{service.title}</h3>
+                <span className={styles.learnMore}>
+                  Ver más <FaArrowRight className={styles.arrow} />
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        {activeTab === 'services' ? (
-          <div className={styles.grid}>
-            {services.map((service, index) => (
-              <Link href={service.path} key={index} className={styles.card}>
-                <div className={styles.imageContainer}>
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className={styles.image}
-                  />
-                  <div className={styles.imageOverlay} />
-                </div>
-                <div className={styles.content}>
-                  <h3 className={styles.serviceTitle}>{service.title}</h3>
-                  <p className={styles.serviceDescription}>{service.description}</p>
-                  <span className={styles.learnMore}>
-                    Ver más <FaArrowRight className={styles.arrow} />
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className={styles.proceduresGrid}>
-            {procedures.map((procedure, index) => (
-              <div key={index} className={styles.procedureCard}>
-                <div className={styles.procedureIcon}>
-                  {procedure.icon}
-                </div>
-                <div className={styles.procedureContent}>
-                  <h3>{procedure.title}</h3>
-                  <p>{procedure.description}</p>
-                </div>
+        <h3 className={styles.subsectionTitle}>Nuestros Procedimientos</h3>
+        <div className={styles.proceduresGrid}>
+          {procedures.map((procedure, index) => (
+            <div key={index} className={styles.procedureCard}>
+              <div className={styles.procedureIcon}>
+                {procedure.icon}
               </div>
-            ))}
-          </div>
-        )}
+              <div className={styles.procedureContent}>
+                <h3>{procedure.title}</h3>
+                <p>{procedure.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className={styles.cta}>
           <div className={styles.ctaContent}>

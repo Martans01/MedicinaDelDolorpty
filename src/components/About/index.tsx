@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './styles.module.css'
 import servicesStyles from '../../app/styles/services.module.css'
-import { FaUserMd, FaHospital, FaHeartbeat, FaCalendarCheck, FaArrowRight, FaSpinner, FaRedoAlt, FaExpand, FaCompress, FaCheck, FaEye, FaTimes } from 'react-icons/fa'
+import { FaUserMd, FaHospital, FaHeartbeat, FaCalendarCheck, FaArrowRight, FaSpinner, FaRedoAlt } from 'react-icons/fa'
 
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -192,7 +192,7 @@ export default function About() {
         {/* Widget de Cliniweb para agendar citas */}
         <div className={servicesStyles.widgetSection} id="agendar-cita">
           <h2>Agende su cita directamente</h2>
-          <p>Utilice nuestro sistema de citas en línea para encontrar el horario que mejor se adapte a sus necesidades.</p>
+          <p>Seleccione el horario que mejor se adapte a sus necesidades a través de Cliniweb.</p>
           <p style={{ fontStyle: 'italic', fontSize: '0.9em' }}>Haz clic en el área de abajo para abrir el sistema de citas en una nueva pestaña.</p>
 
           <div

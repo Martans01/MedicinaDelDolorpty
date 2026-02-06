@@ -1,0 +1,126 @@
+.featuredSection {
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sectionLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4FB965;
+  margin: 0 0 0.5rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  color: #012C3C;
+  margin: 0 0 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  background: rgba(79, 185, 101, 0.12);
+  color: #2d8a42;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #012C3C;
+  margin: 0 0 1.5rem;
+  line-height: 1.35;
+  max-width: 600px;
+}
+
+.videoWrapper {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 1.5rem;
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  max-width: 550px;
+  margin: 0 auto 1.75rem;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-block;
+  background: #4FB965;
+  color: white;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.ctaPrimary:hover {
+  background: #3da853;
+}
+
+.ctaSecondary {
+  display: inline-block;
+  background: transparent;
+  color: #012C3C;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid #012C3C;
+  transition: background 0.2s, color 0.2s;
+}
+
+.ctaSecondary:hover {
+  background: #012C3C;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .featuredSection {
+    padding: 2.5rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.15rem;
+  }
+
+  .videoWrapper {
+    max-width: 100%;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+}

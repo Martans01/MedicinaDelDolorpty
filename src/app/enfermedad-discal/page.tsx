@@ -23,7 +23,6 @@ export default function EnfermedadDiscalPage() {
                 height={600}
                 className={styles.image}
                 priority
-                unoptimized
               />
             </div>
             

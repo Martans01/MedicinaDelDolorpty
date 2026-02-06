@@ -1,0 +1,446 @@
+.adminLayout {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.adminHeader {
+  background: #012C3C;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminHeader h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.adminHeader a {
+  color: #4FB965;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.adminHeader a:hover {
+  text-decoration: underline;
+}
+
+.adminNav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Dashboard */
+.dashboardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboardHeader h2 {
+  font-size: 1.5rem;
+  color: #012C3C;
+  margin: 0;
+}
+
+.createBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #4FB965;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.createBtn:hover {
+  background: #3da853;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filterSelect {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+}
+
+/* Content list */
+.contentGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.contentCard {
+  background: white;
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardInfo h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #012C3C;
+}
+
+.cardMeta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badgePublished {
+  background: #e6f7ea;
+  color: #2d8a4e;
+}
+
+.badgeDraft {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badgeCategory {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.cardDate {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.actionBtn {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background: #f5f5f5;
+}
+
+.editBtn {
+  color: #1565c0;
+  border-color: #1565c0;
+}
+
+.editBtn:hover {
+  background: #e3f2fd;
+}
+
+.publishBtn {
+  color: #2d8a4e;
+  border-color: #2d8a4e;
+}
+
+.publishBtn:hover {
+  background: #e6f7ea;
+}
+
+.unpublishBtn {
+  color: #e65100;
+  border-color: #e65100;
+}
+
+.unpublishBtn:hover {
+  background: #fff3e0;
+}
+
+.deleteBtn {
+  color: #d32f2f;
+  border-color: #d32f2f;
+}
+
+.deleteBtn:hover {
+  background: #ffebee;
+}
+
+/* Form */
+.formPage {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.formPage h2 {
+  color: #012C3C;
+  margin-bottom: 1.5rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #012C3C;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.formGroup label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #4FB965;
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.formHelp {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.tagsInput {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tagsInput input {
+  flex: 1;
+}
+
+.tagsInput button {
+  padding: 0.7rem 1rem;
+  background: #012C3C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tagsList {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.tag button {
+  background: none;
+  border: none;
+  color: #1565c0;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.submitBtn {
+  padding: 0.75rem 2rem;
+  background: #4FB965;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submitBtn:hover {
+  background: #3da853;
+}
+
+.submitBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.draftBtn {
+  padding: 0.75rem 2rem;
+  background: white;
+  color: #012C3C;
+  border: 2px solid #012C3C;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.draftBtn:hover {
+  background: #f5f5f5;
+}
+
+.draftBtn:disabled {
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Video preview */
+.videoPreview {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.videoPreview h4 {
+  margin: 0 0 0.75rem;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.previewContainer {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #888;
+}
+
+.emptyState h3 {
+  color: #012C3C;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .dashboardHeader {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .createBtn {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .contentCard {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cardActions {
+    justify-content: flex-end;
+  }
+
+  .formPage {
+    padding: 1rem;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+
+  .adminHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+}

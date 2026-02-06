@@ -6,8 +6,22 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ['image/webp'],
     minimumCacheTTL: 60,
-    unoptimized: true,
+    unoptimized: false,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/contenido',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/contenido/:path*',
+        destination: '/blog/:path*',
+        permanent: true,
+      },
+    ]
   },
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

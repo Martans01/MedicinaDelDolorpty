@@ -1,5 +1,5 @@
 .services {
-  padding: 8rem 0;
+  padding: 5rem 0 2rem;
   background: linear-gradient(to bottom, #f8f9fa 0%, white 100%);
   position: relative;
   overflow: hidden;
@@ -34,7 +34,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .sectionBadge {
@@ -79,81 +79,34 @@
   font-weight: 400;
 }
 
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-
-.tab {
-  padding: 1rem 2rem;
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  color: #444;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.tab::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #4FB965 0%, #3d9850 100%);
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
-
-.tab:hover {
+.subsectionTitle {
+  font-size: 1.3rem;
   color: #012C3C;
-}
-
-.tab.active {
-  color: #012C3C;
-  font-weight: 600;
-}
-
-.tab.active::after {
-  width: 100%;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+  text-align: center;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
-  margin-bottom: 5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
 }
 
 .proceduresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 5rem;
-  animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 3.5rem;
 }
 
 .card {
   background: white;
-  border-radius: 25px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   display: flex;
@@ -164,15 +117,15 @@
 }
 
 .card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
   border-color: rgba(79, 185, 101, 0.3);
 }
 
 .imageContainer {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 140px;
   overflow: hidden;
 }
 
@@ -186,8 +139,8 @@
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(1, 44, 60, 0.8) 0%, transparent 100%);
-  opacity: 0;
+  background: linear-gradient(to top, rgba(1, 44, 60, 0.8) 0%, rgba(1, 44, 60, 0.2) 100%);
+  opacity: 0.3;
   transition: opacity 0.3s ease;
 }
 
@@ -196,11 +149,11 @@
 }
 
 .card:hover .imageOverlay {
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .content {
-  padding: 2rem;
+  padding: 1rem 1.25rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -209,9 +162,9 @@
 }
 
 .serviceTitle {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   color: #012C3C;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
   font-weight: 700;
   line-height: 1.3;
   transition: color 0.3s ease;
@@ -228,10 +181,10 @@
   margin-top: auto;
   color: #4FB965;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   transition: all 0.3s ease;
 }
 
@@ -246,34 +199,36 @@
 
 .procedureCard {
   background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
   cursor: pointer;
 }
 
 .procedureCard:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
   border-color: rgba(79, 185, 101, 0.3);
   background: linear-gradient(to right, white, rgba(79, 185, 101, 0.05));
 }
 
 .procedureIcon {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, rgba(79, 185, 101, 0.1) 0%, rgba(61, 152, 80, 0.1) 100%);
-  border-radius: 15px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #4FB965;
   flex-shrink: 0;
   transition: all 0.3s ease;
@@ -285,23 +240,19 @@
   transform: scale(1.1);
 }
 
-.procedureContent {
-  flex: 1;
-}
-
 .procedureContent h3 {
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   color: #012C3C;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.2rem;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .procedureContent p {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: #666;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .cta {
@@ -371,7 +322,7 @@
 
 @media (max-width: 1024px) {
   .services {
-    padding: 6rem 0;
+    padding: 4rem 0 1.5rem;
   }
 
   .title {
@@ -379,7 +330,11 @@
   }
 
   .grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .proceduresGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .cta {
@@ -396,17 +351,10 @@
     font-size: 1.1rem;
   }
 
-  .tabs {
-    flex-direction: column;
-    gap: 1rem;
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .tab {
-    width: 100%;
-    text-align: center;
-  }
-
-  .grid,
   .proceduresGrid {
     grid-template-columns: 1fr;
   }
@@ -423,4 +371,10 @@
     width: 100%;
     justify-content: center;
   }
-} 
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

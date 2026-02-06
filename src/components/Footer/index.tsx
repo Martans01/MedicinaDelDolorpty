@@ -44,9 +44,10 @@ export default function Footer() {
               <h4>Tratamientos</h4>
               <ul>
                 <li><Link href="/ciatica">Ciática</Link></li>
-                <li><Link href="/enfermedaddiscal">Enfermedad discal</Link></li>
+                <li><Link href="/enfermedad-discal">Enfermedad discal</Link></li>
                 <li><Link href="/hernia">Hernia discal</Link></li>
-                <li><Link href="/canallumbar">Canal lumbar estrecho</Link></li>
+                <li><Link href="/canal-lumbar">Canal lumbar estrecho</Link></li>
+                <li><Link href="/blog">Blog</Link></li>
               </ul>
             </div>
 

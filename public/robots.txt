@@ -10,12 +10,16 @@ Allow: /hernia
 Allow: /espalda
 Allow: /cuello
 Allow: /cadera
+Allow: /rodilla
+Allow: /servicios
 Allow: /canal-lumbar
 Allow: /ciatica
 Allow: /artrosis-lumbar
 Allow: /enfermedad-discal
+Allow: /blog
 
 # Archivos y directorios a no indexar
 Disallow: /api/
 Disallow: /_next/
-Disallow: /*? 
+Disallow: /gestion-contenido/
+Disallow: /*?

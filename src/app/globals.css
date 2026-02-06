@@ -44,20 +44,7 @@ img {
     }
 }
 
-/* ... resto del CSS ... */
-
-.menu-btn {
-    background-image: url('/img/menu.png');
-    /* resto de los estilos */
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
-.hero {
-    background-image: url('/img/fondo.jpg');
-    /* resto de los estilos */
-}
-
-.services {
-    background-image: url('/img/resplandecientes-rascacielos-revestidos-vidrio-aluminio-monzon-areas-mumbais-lower-parel-worli_469504-19.avif');
-    /* resto de los estilos */
-}
-    

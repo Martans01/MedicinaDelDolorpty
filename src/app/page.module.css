@@ -4,7 +4,7 @@
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 4rem 0;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s ease-out;
@@ -17,28 +17,6 @@
 
 .servicesSection {
   background-color: #f8f9fa;
-  position: relative;
-  overflow: hidden;
-}
-
-.servicesSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(to bottom right, #ffffff 49.9%, transparent 50%);
-}
-
-.servicesSection::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: linear-gradient(to top left, #ffffff 49.9%, transparent 50%);
 }
 
 @media (max-width: 768px) {
